@@ -3,8 +3,10 @@ const assets = require("assets");
 function getColor(color, opacity = 1.0, fromAsset = true) {
     const hexColor = color.toHex(true).replace("#", "").toUpperCase();
     let colorResult = _colorToMaterialColor(`Color(0xFF${hexColor})`);
-    if (fromAsset) {
+    if (fromAsset && false) {
+        console.log(`color no asset: ${colorResult}`);
         colorResult = _colorToAssetPanelColor(colorResult);
+        console.log(`color after asset: ${colorResult}`);
     }
     const withOpacity = _withOpacity((color.a / 255) * opacity);
     return `${colorResult}${withOpacity}`;

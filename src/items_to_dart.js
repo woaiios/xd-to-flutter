@@ -20,7 +20,9 @@ function itemsToDart(items, isFirst = false) {
     const ungroupedItems = removeItemsFromGroup(items);
     const widgets = generateWidgetsFromItems(ungroupedItems);
     const tree = new Tree(widgets, isFirst);
-    return tree.toDart();
+    let treeToDart = tree.toDart();
+    console.log(`ttd: ${treeToDart}`);
+    return treeToDart;
 }
 
 exports.itemsToDart = itemsToDart;
@@ -52,7 +54,10 @@ class Tree {
         let widget = this.node.toDart();
         if (this.isFirst) {
             widget = formatDart(widget + ';');
-            return applyRegex(widget);
+            console.log(`fda: ${widget}`);
+            let ret = applyRegex(widget);
+            console.log(`arx: ${ret}`);
+            return ret;
         }
         return widget;
     }

@@ -46,7 +46,7 @@ function getStyledDecoration(xdNode, parameters) {
 	//! border
 	let s = !xdNode.strokeEnabled ? '' : `
     border: Border.all(
-        width: ${xdNode.strokeWidth}.a,
+        width: ${parseInt(xdNode.strokeWidth, 10)}.a,
         color:  ${getColor(xdNode.stroke, getOpacity(xdNode))},
         ),`;
 	//! shadow
@@ -129,9 +129,9 @@ function _getBorderParam(xdNode, parameters) {
 
 	if (strokeEnableParamRef.isOwn) {
 		if (!xdNode.strokeEnabled || !xdNode.stroke) { return ""; }
-		return `border: Border.all(width: ${xdNode.strokeWidth}, color: ${strokeParam},), `;
+		return `border: Border.all(width: ${parseInt(xdNode.strokeWidth, 10)}, color: ${strokeParam},), `;
 	} else {
-		return `border: ${strokeEnableParam.name} ? Border.all(width: ${xdNode.strokeWidth}, color: ${strokeParam},) : null, `;
+		return `border: ${strokeEnableParam.name} ? Border.all(width: ${parseInt(xdNode.strokeWidth, 10)}, color: ${strokeParam},) : null, `;
 	}
 }
 

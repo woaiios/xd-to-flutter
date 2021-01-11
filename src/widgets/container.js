@@ -44,8 +44,8 @@ class ContainerWidget {
         let c = getColorOrDecorationParam(this.xdNode, this.parameters);
         return `Container(
             ${alignment}
-            width: ${this.xdNode.localBounds.width},
-            height: ${this.xdNode.localBounds.height},
+            width: ${parseInt(this.xdNode.localBounds.width, 10)},
+            height: ${parseInt(this.xdNode.localBounds.height, 10)},
             ${c}
             ${childWidget}
         )`;

@@ -73,6 +73,7 @@ exports.generateArtboards = generateArtboards;
 
 function generateSelection(items) {
     const dartCode = itemsToDart(items, true);
+    console.log(`wdc: ${dartCode}`);
     clipboard.copyText(dartCode);
 }
 

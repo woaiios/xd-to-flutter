@@ -37,12 +37,13 @@ class TextWidget {
                 str = `${str}.w(${w}).h(${h})`
             } else {
                 str = `SizedBox(
-                    width: ${w},
-                    height: ${h},
+                    width: ${parseInt(w, 10)},
+                    height: ${parseInt(h, 10)},
                     child: ${str},
                 )`
             }
         }
+        console.log(`td: ${str}`)
         return str;
     }
 }
@@ -77,11 +78,13 @@ function _getText(xdNode, params) {
     let withStyledWidget = document.querySelector('input[name="simpleType"]');
     withStyledWidget = withStyledWidget != null ? withStyledWidget.checked : null;
     if (withStyledWidget) return styledText(xdNode, textParam);
-    return _borderText(xdNode, 'Text('
+    let ret = _borderText(xdNode, 'Text('
         + `${textParam},` +
         _getStyleParam(xdNode, _getTextStyleParamList(xdNode, null, params)) +
         _getTextAlignParam(xdNode) +
         ')');
+    console.log(ret);
+    return ret;
 }
 
 function _borderText(xdNode, dartCode) {
@@ -91,7 +94,7 @@ function _borderText(xdNode, dartCode) {
         const xdSj = xdNode.strokeJoins;
         const sc = xdSec == 'round' ? '' : `strokeCap: StrokeCap.${xdSec},`;
         const sj = xdSj == 'round' ? '' : `strokeJoin: StrokeJoin.${xdSj},`;
-        const sw = xdNode.strokeWidth == 6 ? '' : `strokeWidth: ${xdNode.strokeWidth},`;
+        const sw = xdNode.strokeWidth == 6 ? '' : `strokeWidth: ${parseInt(xdNode.strokeWidth, 10)},`;
         return `
         BorderedText( //TODO: install bordered_text package
             ${sw}
@@ -143,7 +146,7 @@ function styledText(xdNode, textParam) {
         const xdSj = xdNode.strokeJoins;
         const sc = xdSec == 'round' ? '' : `cap: StrokeCap.${xdSec},`;
         const sj = xdSj == 'round' ? '' : `join: StrokeJoin.${xdSj},`;
-        const sw = xdNode.strokeWidth == 6 ? '' : `width: ${xdNode.strokeWidth},`;
+        const sw = xdNode.strokeWidth == 6 ? '' : `width: ${parseInt(xdNode.strokeWidth, 10)},`;
         tb = `.border(color:${getColor(xdNode.stroke, getOpacity(xdNode))},${sw}${sc}${sj})`;
     }
     return `${textParam}.text()${ff}${c}${al}${fs}${fw}${ts}${td}${tb}`;
@@ -197,7 +200,7 @@ function _getTextAlignParam(xdNode) {
 function _getTextStyleParamList(xdNode, styleRange, params, isDefault = false) {
     // Builds an array of style parameters.
     let o = styleRange || xdNode;
-    return [
+    let ret = [
         _getFontFamilyParam(o),
         _getFontSizeParam(o),
         _getColorParam(o, params),
@@ -210,6 +213,8 @@ function _getTextStyleParamList(xdNode, styleRange, params, isDefault = false) {
         (!styleRange || isDefault ? _getHeightParam(xdNode) : null),
         (!styleRange || isDefault ? _getShadowsParam(xdNode) : null),
     ];
+    console.log(ret);
+    return ret;
 }
 
 exports._getTextStyleParamList = _getTextStyleParamList;
@@ -245,15 +250,19 @@ function _getFontFamily(o) {
 function _getFontFamilyParam(o) {
     const family = _getFontFamilyName(o);
     if (googleFonts.includes(family)) return '';
-    return `fontFamily: '${_getFontFamily(o)}', `;
+    return '';
+    // return `fontFamily: '${_getFontFamily(o)}', `;
 }
 
 function _getFontSizeParam(o) {
-    return `fontSize: ${o.fontSize}, `;
+    console.log(o.fontSize);
+    console.log(`fontSize: ${parseInt(o.fontSize, 10)}, `);
+    return `fontSize: ${parseInt(o.fontSize, 10)}, `;
 }
 
 function _getColorParam(o, params) {
     const { getOpacity } = require("../util");
+    console.log(params);
     return `color: ${params["fill"].isOwn
         ? getColor(o.fill, getOpacity(o))
         : params["fill"].name}, `;
@@ -291,8 +300,9 @@ function _getHeightParam(o) {
     // XD reports a lineSpacing of 0 to indicate default spacing.
     // Flutter uses a multiplier against the font size for its "height" value.
     // XD uses a pixel value.
-    return (o.lineSpacing === 0 ? '' :
-        `height: ${o.lineSpacing / o.fontSize}, `);
+    return '';
+    // return (o.lineSpacing === 0 ? '' :
+    //     `height: ${o.lineSpacing / o.fontSize}, `);
 }
 
 function _getShadowsParam(xdNode) {
@@ -358,7 +368,7 @@ const FONT_WEIGHTS = {
     'medium': 'w500',
     'semibold': 'w600',
     'demibold': 'w600',
-    'bold': 'w700', // or 'bold'
+    'bold': 'bold', // or 'bold'
     'extrabold': 'w800',
     'heavy': 'w800',
     'black': 'w900',

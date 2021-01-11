@@ -1,5 +1,5 @@
 {
-  "name": "Flutter Code Generator",
+  "name": "Ninza",
   "host": {
     "app": "XD",
     "minVersion": "21.0"
@@ -7,9 +7,9 @@
   "id": "b9d42c73",
   "icons": [
     {
-      "path": "images/icon@1x.png",
-      "width": 24,
-      "height": 24
+      "path": "images/icon@2x.png",
+      "width": 48,
+      "height": 48
     },
     {
       "path": "images/icon@2x.png",
@@ -28,8 +28,8 @@
       "type": "menu",
       "commandId": "onTapGenerate",
       "shortcut": {
-        "mac": "Cmd+W",
-        "win": "Ctrl+W"
+        "mac": "Cmd+F",
+        "win": "Ctrl+F"
       }
     },
     {
@@ -37,8 +37,8 @@
       "type": "menu",
       "commandId": "exportColor",
       "shortcut": {
-        "mac": "Cmd+F",
-        "win": "Ctrl+F"
+        "mac": "Cmd+W",
+        "win": "Ctrl+W"
       }
     }
   ],

@@ -38,8 +38,8 @@ class Children {
         this.w = this.node.bounds.x2 - this.node.bounds.x1;
         this.h = this.node.bounds.y2 - this.node.bounds.y1;
         if (withStyledWidget) return this.simpleType(widgets);
-        const width = `width: ${this.w},`;
-        const height = `height: ${this.h},`;
+        const width = `width: ${parseInt(this.w, 10)},`;
+        const height = `height: ${parseInt(this.h, 10)},`;
         return `
             SizedBox(
             ${width}
@@ -248,8 +248,8 @@ class Children {
         const bot = this.botDistance[index];
         const left = this.leftDistance[index];
         const right = this.rightDistance[index];
-        let horizontalPositioned = left == right ? '' : left < right ? left == 0 && this.isLeft ? '' : `left: ${left},` : right == 0 && this.isRight ? '' : `right: ${right},`;
-        let verticalPositioned = top == bot ? '' : top < bot ? top == 0 && this.isTop ? '' : `top: ${top},` : bot == 0 && this.isBot ? '' : `bottom: ${bot},`;
+        let horizontalPositioned = left == right ? '' : left < right ? left == 0 && this.isLeft ? '' : `left: ${parseInt(left, 10)},` : right == 0 && this.isRight ? '' : `right: ${parseInt(right, 10)},`;
+        let verticalPositioned = top == bot ? '' : top < bot ? top == 0 && this.isTop ? '' : `top: ${parseInt(top, 10)},` : bot == 0 && this.isBot ? '' : `bottom: ${parseInt(bot, 10)},`;
         if (horizontalPositioned == '' && verticalPositioned == '') return widget;
         if (withStyledWidget) {
             horizontalPositioned = verticalPositioned == '' ? horizontalPositioned.substr(0, horizontalPositioned.length - 1) : horizontalPositioned;

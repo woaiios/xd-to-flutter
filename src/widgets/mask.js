@@ -21,8 +21,8 @@ class MaskWidget {
         return `
         Container(
             // [${this.xdNode.name}] Group masks aren't supported.
-            width: ${this.xdNode.localBounds.width},
-            height: ${this.xdNode.localBounds.height},
+            width: ${parseInt(this.xdNode.localBounds.width, 10)},
+            height: ${parseInt(this.xdNode.localBounds.height, 10)},
             color: Colors.red,
         )`;
     }
